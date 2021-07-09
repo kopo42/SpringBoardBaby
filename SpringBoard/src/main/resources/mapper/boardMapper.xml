@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.kopo.kopo42.board.repository.mapper.BoardItemMapper">
+	<select id="findAll" resultType="kr.ac.kopo.kopo42.board.domain.BoardItem">
+		select
+			*
+		from
+			board
+	</select>
+	
+	<select id="findAllByTitle" resultType = "kr.ac.kopo.kopo42.board.domain.BoardItem">
+		select
+		*
+		from
+		board b
+		where
+		1 = 1
+		<include refid = "whereCondition"/>
+	</select>
+	
+	<sql id = "whereCondition">
+		<if test = "title != null">
+			and b.title = #{title}
+			</if>
+	</sql>
+</mapper>

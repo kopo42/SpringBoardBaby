@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.kopo.kopo42.board.repository.mapper.BoardItemMapper">
+	<select id="boardItemList" resultType="kr.ac.kopo.kopo42.board.domain.BoardItem">
+		select
+			id, title, content, date
+			from board1
+	</select>
+	
+	<insert id="create" parameterType="kr.ac.kopo.kopo42.board.domain.BoardItem">
+	insert into
+		board1 (id, title, content)
+		values(#{id}, #{title}, #{content})
+	</insert>
+	
+	
+	<select id="findAllItem" resultType="kr.ac.kopo.kopo42.board.domain.BoardItem">
+		select
+			*
+		from
+			board1
+	</select>
+	
+	<select id="findAllByTitleItem" resultType = "kr.ac.kopo.kopo42.board.domain.BoardItem">
+		select
+		*
+		from
+		board1 b
+		where
+		1 = 1
+		<include refid = "whereConditionItem"/>
+	</select>
+	
+	<sql id = "whereConditionItem">
+		<if test = "title != null">
+			and b.title = #{title}
+			</if>
+	</sql>
+</mapper>
